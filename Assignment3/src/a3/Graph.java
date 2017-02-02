@@ -1,13 +1,23 @@
 package a3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.Set;
 
 public class Graph<T> implements GraphInterface<T>
 {
-    public Graph (int vertices){
+    private HashMap<T, Integer> vertices;
+    private HashMap<Integer, ArrayList<T>> adjacencyList;
+    private int maxVertices;
+    private int numVertices;
+    private int numEdges;
 
+    public Graph (int maxSize){
+
+        vertices=new HashMap<T, Integer>();
+        adjacencyList=new HashMap<Integer, ArrayList<T>>();
+        maxVertices = maxSize;
     }
 
     public ArrayList<Set<String>> connectedComponents(){
@@ -15,19 +25,21 @@ public class Graph<T> implements GraphInterface<T>
         return null;
     }
 
+    // Returns true if this graph is empty; otherwise, returns false.
     @Override
     public boolean isEmpty() {
-        return false;
+        return vertices.isEmpty();
     }
 
+    // Returns true if this graph is full; otherwise, returns false.
     @Override
     public boolean isFull() {
-        return false;
+        return numVertices == maxVertices;
     }
 
     @Override
     public void addVertex(T vertex) throws GraphIsFullException, VertexExistsException {
-
+        numVertices++;
     }
 
     @Override
