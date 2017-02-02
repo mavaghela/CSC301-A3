@@ -10,14 +10,16 @@ public class Graph<T> implements GraphInterface<T>
     private HashMap<T, Integer> vertices;
     private HashMap<Integer, ArrayList<T>> adjacencyList;
     private int maxVertices;
-    private int numVertices = 0;
-    private int numEdges = 0;
+    private int numVertices;
+    private int numEdges;
 
     public Graph (int maxSize){
 
         vertices=new HashMap<T, Integer>();
         adjacencyList=new HashMap<Integer, ArrayList<T>>();
         maxVertices = maxSize;
+        numVertices = 0;
+        numEdges = 0;
     }
 
     public ArrayList<Set<T>> connectedComponents(){
