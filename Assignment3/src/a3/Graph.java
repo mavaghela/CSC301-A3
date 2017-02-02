@@ -10,8 +10,8 @@ public class Graph<T> implements GraphInterface<T>
     private HashMap<T, Integer> vertices;
     private HashMap<Integer, ArrayList<T>> adjacencyList;
     private int maxVertices;
-    private int numVertices;
-    private int numEdges;
+    private int numVertices = 0;
+    private int numEdges = 0;
 
     public Graph (int maxSize){
 
@@ -20,7 +20,7 @@ public class Graph<T> implements GraphInterface<T>
         maxVertices = maxSize;
     }
 
-    public ArrayList<Set<String>> connectedComponents(){
+    public ArrayList<Set<T>> connectedComponents(){
 
         return null;
     }
@@ -34,17 +34,27 @@ public class Graph<T> implements GraphInterface<T>
     // Returns true if this graph is full; otherwise, returns false.
     @Override
     public boolean isFull() {
-        return numVertices == maxVertices;
+        return numVertices >= maxVertices;
     }
 
     @Override
     public void addVertex(T vertex) throws GraphIsFullException, VertexExistsException {
+        if (isFull()){
+            throw new GraphIsFullException();
+        }
+        if(vertices.containsKey(vertex)){
+            throw new VertexExistsException();
+        }
         numVertices++;
+        vertices.put(vertex,numVertices);
+        adjacencyList.put(numVertices, new ArrayList<T>());
     }
 
     @Override
     public void addEdge(T fromVertex, T toVertex) {
-
+        int key = vertices.get(fromVertex);
+        (adjacencyList.get(key)).add(toVertex);
+        numEdges++;
     }
 
     @Override
