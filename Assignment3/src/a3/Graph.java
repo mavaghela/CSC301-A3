@@ -101,7 +101,7 @@ public class Graph<T> implements GraphInterface<T>
 
     private Set<T> DFSSearch(T vertex)
     {
-        Set<T> dfs = new HashSet<T>();;
+        Set<T> dfs = new HashSet<T>();
         Stack<T> stack=new Stack<T>();
         stack.add(vertex);
 
@@ -110,8 +110,8 @@ public class Graph<T> implements GraphInterface<T>
             T element=stack.pop();
             dfs.add(element); // System.out.print(element.data + "\t");
             Queue<T> neighbours=getToVertices(element);
-            for (int i = 0; i < neighbours.size(); i++) {
-                T neighbour=(neighbours).element();
+            while(!neighbours.isEmpty()){
+                T neighbour=(neighbours).remove();
                 if(neighbour!=null && !isMarked(neighbour)) {
                     stack.add(neighbour);
                     markVertex(neighbour);
