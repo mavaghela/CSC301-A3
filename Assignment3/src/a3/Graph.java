@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Graph<T> implements GraphInterface<T>
 {
-    private HashMap<T, Integer> vertices;
-    private HashMap<Integer, ArrayList<T>> adjacencyList;
+    private HashMap<T, Boolean> markedVertices;
+    private HashMap<T, ArrayList<T>> graphList;
     private int maxVertices;
     private int numVertices;
     private int numEdges;
 
     public Graph (int maxSize){
 
-        vertices=new HashMap<T, Integer>();
-        adjacencyList=new HashMap<Integer, ArrayList<T>>();
+        markedVertices=new HashMap<T, Boolean>();
+        graphList=new HashMap<T, ArrayList<T>>();
         maxVertices = maxSize;
         numVertices = 0;
         numEdges = 0;
@@ -27,7 +27,7 @@ public class Graph<T> implements GraphInterface<T>
     /** Returns true if this graph is empty; otherwise, returns false. **/
     @Override
     public boolean isEmpty() {
-        return vertices.isEmpty();
+        return graphList.isEmpty();
     }
 
     /** Returns true if this graph is full; otherwise, returns false. **/
@@ -46,12 +46,12 @@ public class Graph<T> implements GraphInterface<T>
         if (isFull()){
             throw new GraphIsFullException();
         }
-        if(vertices.containsKey(vertex)){
+        if(graphList.containsKey(vertex)){
             throw new VertexExistsException();
         }
         numVertices++;
-        vertices.put(vertex,numVertices);
-        adjacencyList.put(numVertices, new ArrayList<T>());
+        markedVertices.put(vertex,false);
+        graphList.put(vertex, new ArrayList<T>());
     }
 
     /** Adds an edge with the specified weight from fromVertex to toVertex. **/
@@ -60,18 +60,15 @@ public class Graph<T> implements GraphInterface<T>
         if(fromVertex == toVertex){
             return;
         }
-        int fromKey = vertices.get(fromVertex);
-        int toKey = vertices.get(toVertex);
-        (adjacencyList.get(fromKey)).add(toVertex);
-        (adjacencyList.get(toKey)).add(fromVertex);
+        (graphList.get(fromVertex)).add(toVertex);
+        (graphList.get(toVertex)).add(fromVertex);
         numEdges++;
     }
 
     /** Returns a queue of the vertices that are adjacent from vertex. **/
     @Override
     public Queue<T> getToVertices(T vertex) {
-        int key = vertices.get(vertex);
-        Queue<T> pie = new LinkedList<>(adjacencyList.get(key));
+        Queue<T> pie = new LinkedList<>(graphList.get(vertex));
         return pie;
     }
 
@@ -90,6 +87,6 @@ public class Graph<T> implements GraphInterface<T>
     /** Returns true if vertex is marked; otherwise, returns false. **/
     @Override
     public boolean isMarked(T vertex) {
-        return false;
+        return markedVertices.get(vertex);
     }
 }
