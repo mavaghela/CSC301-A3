@@ -3,7 +3,8 @@ package a3;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import Graph;
+import a3.Graph;
+import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
