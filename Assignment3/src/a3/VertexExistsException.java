@@ -4,7 +4,12 @@ package a3;
 //A correctly working class gets up to 2 marks
 
 public class VertexExistsException extends Exception{
-	
-//Your code goes here
 
+    public VertexExistsException() {
+        super();
+    }
+
+    public VertexExistsException(String message) {
+        super(message);
+    }
 }

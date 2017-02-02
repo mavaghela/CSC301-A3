@@ -8,6 +8,7 @@ public class Graph<T> implements GraphInterface<T>
     private HashMap<T, ArrayList<T>> graphList;
     private int maxVertices;
     private int numVertices;
+    private String message;
 
     public Graph (int maxSize)
     {
@@ -56,10 +57,12 @@ public class Graph<T> implements GraphInterface<T>
     public void addVertex(T vertex) throws GraphIsFullException, VertexExistsException
     {
         if (isFull()){
-            throw new GraphIsFullException();
+            message = String.format("The graph is full, it already has %d vertices.", maxVertices);
+            throw new GraphIsFullException(message);
         }
         if(graphList.containsKey(vertex)){
-            throw new VertexExistsException();
+            message = "The vertex already exists.";
+            throw new VertexExistsException(message);
         }
         numVertices++;
         markedVertices.put(vertex,false);
