@@ -25,8 +25,15 @@ public class Graph<T> implements GraphInterface<T>
      Add the set to the list **/
 
     public ArrayList<Set<T>> connectedComponents(){
+        ArrayList<Set<T>> components = new ArrayList<Set<T>>();
+        for (T key : markedVertices.keySet()){
+            if (!isMarked(key)) {
+                Set<T> tempSet = DFSSearch(key);
+                components.add(tempSet);
+            }
+        }
 
-        return null;
+        return components;
     }
 
     /** Returns true if this graph is empty; otherwise, returns false. **/
@@ -95,5 +102,27 @@ public class Graph<T> implements GraphInterface<T>
     @Override
     public boolean isMarked(T vertex) {
         return markedVertices.get(vertex);
+    }
+
+    private Set<T> DFSSearch(T vertex)
+    {
+        Set<T> dfs = new HashSet<T>();
+        Stack<T> stack=new Stack<T>();
+        stack.add(vertex);
+
+        markVertex(vertex); //node.visited=true;
+        while (!stack.isEmpty()) {
+            T element=stack.pop();
+            dfs.add(element); // System.out.print(element.data + "\t");
+            Queue<T> neighbours=getToVertices(element);
+            while(!neighbours.isEmpty()){
+                T neighbour=(neighbours).remove();
+                if(neighbour!=null && !isMarked(neighbour)) {
+                    stack.add(neighbour);
+                    markVertex(neighbour);
+                }
+            }
+        }
+        return dfs;
     }
 }
