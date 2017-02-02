@@ -76,6 +76,9 @@ public class Graph<T> implements GraphInterface<T>
         if(fromVertex == toVertex){
             return;
         }
+        if((graphList.get(fromVertex)).contains(toVertex) || graphList.get(toVertex).contains(fromVertex)){
+            return;
+        }
         (graphList.get(fromVertex)).add(toVertex);
         (graphList.get(toVertex)).add(fromVertex);
     }
