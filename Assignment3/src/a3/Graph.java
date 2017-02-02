@@ -1,9 +1,6 @@
 package a3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class Graph<T> implements GraphInterface<T>
 {
@@ -74,7 +71,8 @@ public class Graph<T> implements GraphInterface<T>
     @Override
     public Queue<T> getToVertices(T vertex) {
         int key = vertices.get(vertex);
-        return (Queue<T>) (adjacencyList.get(key));
+        Queue<T> pie = new LinkedList<>(adjacencyList.get(key));
+        return pie;
     }
 
     /** Sets marks for all vertices to false. **/
