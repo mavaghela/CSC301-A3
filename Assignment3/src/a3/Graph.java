@@ -26,7 +26,7 @@ public class Graph<T> implements GraphInterface<T>
         ArrayList<Set<T>> components = new ArrayList<Set<T>>();
         for (T key : markedVertices.keySet()){
             if (!isMarked(key)) {
-                Set<T> tempSet = DFSSearch(key);
+                Set<T> tempSet = DFSVisit(key);
                 components.add(tempSet);
             }
         }
@@ -107,12 +107,12 @@ public class Graph<T> implements GraphInterface<T>
         return markedVertices.get(vertex);
     }
 
-    private Set<T> DFSSearch(T vertex)
+    public Set<T> DFSVisit(T startVertex)
     {
         Set<T> dfs = new HashSet<T>();
         Stack<T> stack = new Stack<T>();
-        stack.add(vertex);
-        markVertex(vertex);
+        stack.add(startVertex);
+        markVertex(startVertex);
 
         while (!stack.isEmpty()) {
             T element = stack.pop();
