@@ -76,12 +76,14 @@ public class Graph<T> implements GraphInterface<T>
     @Override
     public void clearMarks() {
 
+        for (T key : markedVertices.keySet())
+            markedVertices.put(key, false);
     }
 
     /** Sets mark for vertex to true. **/
     @Override
     public void markVertex(T vertex) {
-
+        markedVertices.put(vertex, true);
     }
 
     /** Returns true if vertex is marked; otherwise, returns false. **/
