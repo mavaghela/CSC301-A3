@@ -99,9 +99,9 @@ public class Graph<T> implements GraphInterface<T>
         return markedVertices.get(vertex);
     }
 
-    private Set<t> DFSSearch(T vertex)
+    private Set<T> DFSSearch(T vertex)
     {
-        Set<T> dfs = new Set<T>();
+        Set<T> dfs = new HashSet<T>();;
         Stack<T> stack=new Stack<T>();
         stack.add(vertex);
 
@@ -109,9 +109,9 @@ public class Graph<T> implements GraphInterface<T>
         while (!stack.isEmpty()) {
             T element=stack.pop();
             dfs.add(element); // System.out.print(element.data + "\t");
-            ArrayList<T> neighbours=getToVertices(element);
+            Queue<T> neighbours=getToVertices(element);
             for (int i = 0; i < neighbours.size(); i++) {
-                T neighbour=neighbours.get(i);
+                T neighbour=(neighbours).element();
                 if(neighbour!=null && !isMarked(neighbour)) {
                     stack.add(neighbour);
                     markVertex(neighbour);
