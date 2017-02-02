@@ -19,6 +19,11 @@ public class Graph<T> implements GraphInterface<T>
         numEdges = 0;
     }
 
+    /** Returns a list of connected components of the graph
+     For each vertex that does not belong to the connected components
+     already on the list, call DFSVisit to obtain a set of vertices connected to the current vertex
+     Add the set to the list **/
+
     public ArrayList<Set<T>> connectedComponents(){
 
         return null;
